@@ -12,6 +12,12 @@ import java.util.concurrent.atomic.AtomicReference;
  * Internal class that manages license state and validation.
  * Provides thread-safe license checking and status management.
  * </p>
+ * <p>
+ * Integration Note: This class is designed to be called by HolidaySystem
+ * (to be implemented in a future task) before provider access. The public
+ * methods (setLicenseKey, validateLicense) provide the integration points
+ * for the HolidaySystem facade.
+ * </p>
  */
 class LicenseValidator {
 
