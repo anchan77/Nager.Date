@@ -243,6 +243,32 @@ public class DateHelper {
     }
 
     /**
+     * Check if a date is a weekend day for a given country
+     * <p>
+     * Translated from C# DateTimeExtension.IsWeekend method.
+     * This method checks if the given date falls on a weekend day according to
+     * the weekend rules of the specified country.
+     * </p>
+     * <p>
+     * <b>Note:</b> This is a stub implementation. The full implementation requires
+     * WeekendSystem infrastructure (WeekendProvider, IWeekendProvider, country-specific
+     * weekend configurations) which will be migrated in a future task.
+     * </p>
+     *
+     * @param date the date to check
+     * @param countryCode the country code (ISO 3166-1 ALPHA-2)
+     * @return true if the date is a weekend day in the given country, false otherwise
+     * @throws UnsupportedOperationException until WeekendSystem is implemented
+     */
+    public static boolean isWeekend(LocalDate date, at.nager.date.CountryCode countryCode) {
+        // TODO: Implement once WeekendSystem is migrated (requires IWeekendProvider, WeekendProvider, etc.)
+        throw new UnsupportedOperationException(
+                "isWeekend method requires WeekendSystem infrastructure which will be migrated in a future task. " +
+                "This includes: WeekendSystem, IWeekendProvider, WeekendProvider, and country-specific weekend configurations."
+        );
+    }
+
+    /**
      * Shift a date based on which day of the week it falls on
      * <p>
      * This method applies custom transformation functions to shift dates that fall on
