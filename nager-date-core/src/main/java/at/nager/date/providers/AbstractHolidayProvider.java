@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * and this class converts them to Holiday objects and orders them by date.
  * </p>
  */
-abstract class AbstractHolidayProvider implements IHolidayProvider {
+public abstract class AbstractHolidayProvider implements IHolidayProvider {
 
     private final CountryCode countryCode;
 

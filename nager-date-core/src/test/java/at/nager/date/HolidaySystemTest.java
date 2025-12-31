@@ -108,8 +108,8 @@ class HolidaySystemTest {
 
         List<Holiday> holidays = HolidaySystem.getHolidays(2024, CountryCode.DE);
         assertNotNull(holidays);
-        // Germany provider is registered (but returns empty list as placeholder)
-        assertTrue(holidays.isEmpty());
+        // Germany provider is now fully implemented and returns holidays
+        assertFalse(holidays.isEmpty());
     }
 
     @Test
@@ -121,8 +121,8 @@ class HolidaySystemTest {
 
         List<Holiday> holidays = HolidaySystem.getHolidays(startDate, endDate, CountryCode.DE);
         assertNotNull(holidays);
-        // Germany provider is registered (but returns empty list as placeholder)
-        assertTrue(holidays.isEmpty());
+        // Germany provider is now fully implemented and returns holidays
+        assertFalse(holidays.isEmpty());
     }
 
     @Test
@@ -149,8 +149,8 @@ class HolidaySystemTest {
 
         List<Holiday> holidays = HolidaySystem.getHolidays(startDate, endDate);
         assertNotNull(holidays);
-        // Germany provider returns empty list (placeholder), so worldwide is also empty
-        assertTrue(holidays.isEmpty());
+        // Germany provider is now fully implemented, so worldwide includes German holidays
+        assertFalse(holidays.isEmpty());
     }
 
     @Test
@@ -160,8 +160,8 @@ class HolidaySystemTest {
         LocalDate date = LocalDate.of(2024, 1, 1);
         boolean isPublicHoliday = HolidaySystem.isPublicHoliday(date, CountryCode.DE);
 
-        // Should return false since Germany provider returns empty list (placeholder)
-        assertFalse(isPublicHoliday);
+        // Should return true since January 1st is New Year's Day (a public holiday in Germany)
+        assertTrue(isPublicHoliday);
     }
 
     @Test
