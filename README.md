@@ -45,6 +45,49 @@ Uses EnumSet<HolidayTypes> for type safety with utility methods for bitmask conv
 ### ObservedRuleSet Functions
 Uses Function<LocalDate, LocalDate> to represent date transformation rules for each day of the week.
 
+### License Validation Strategy
+
+**Chosen Approach:** Simplified Validation
+
+The Java port implements a simplified license validation system instead of full cryptographic parity with the C# Nager.LicenseSystem library.
+
+**Rationale:**
+- The C# version uses an external `Nager.LicenseSystem` library with proprietary cryptographic validation
+- Porting the complete cryptographic algorithm would require reverse engineering the external library
+- Simplified approach maintains API compatibility while providing a working foundation
+- Clear migration path exists for future cryptographic enhancement
+
+**Implementation Details:**
+- `LicenseHelper.checkLicenseKey()` performs basic Base64 format validation
+- `LicenseValidator` manages license state using thread-safe atomic operations
+- `LicenseKeyException` provides identical error messaging to C# version
+- All public APIs match the C# interface for future compatibility
+
+**License Key Compatibility:**
+⚠️ **Important:** Java and C# license keys are NOT interchangeable. The Java implementation uses simplified validation and does not perform cryptographic verification of C# license keys.
+
+**Usage:**
+```java
+// Set license key before using holiday functionality
+HolidaySystem.setLicenseKey("your-license-key");
+
+// License validation occurs automatically on first use
+List<Holiday> holidays = HolidaySystem.getHolidays(2024, CountryCode.DE);
+```
+
+**For Production Use:**
+This simplified validation is suitable for testing and demonstration. For production deployments requiring cryptographic license validation:
+1. Contact the project maintainers for Java-specific license keys
+2. Consider implementing full cryptographic parity by porting the Nager.LicenseSystem algorithm
+3. Or use the C# version if cryptographic license validation is required
+
+**Trade-offs:**
+- ✅ API compatibility with C# version maintained
+- ✅ Thread-safe design ready for production use
+- ✅ Clear documentation and migration path
+- ❌ Not cryptographically equivalent to C# version
+- ❌ Separate license key management required
+
 ## Next Steps
 
 - Implement public facades (HolidaySystem, WeekendSystem)

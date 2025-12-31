@@ -38,14 +38,26 @@ public class LicenseHelper {
      * Returns null for invalid, malformed, or null license keys.
      * </p>
      * <p>
-     * Note: This is a simplified implementation. The C# version uses the Nager.LicenseSystem
-     * library with cryptographic validation. This Java version provides basic validation
-     * for demonstration purposes. For production use with full cryptographic parity,
-     * the complete validation algorithm should be ported from C#.
+     * Edge Case Handling:
+     * - Null keys: Returns null immediately
+     * - Empty/whitespace keys: Returns null immediately
+     * - Malformed keys: Caught by Base64 decoding, returns null
+     * - Expired keys: Note that this simplified implementation cannot detect actual
+     *   expiration from the key data. It generates a future expiration date. The
+     *   LicenseValidator.validateLicense() method is responsible for checking if
+     *   the returned LicenseInfo indicates an expired license (via isValid()).
+     * </p>
+     * <p>
+     * Design Note: This is a simplified implementation. The C# version uses the
+     * Nager.LicenseSystem library with cryptographic validation that extracts
+     * expiration dates from the license key itself. This Java version provides
+     * basic format validation for demonstration purposes. For production use with
+     * full cryptographic parity and proper expiration detection, the complete
+     * validation algorithm should be ported from C#.
      * </p>
      *
      * @param licenseKey the license key to validate (can be null)
-     * @return LicenseInfo object if the key is valid, null otherwise
+     * @return LicenseInfo object if the key format is valid, null otherwise
      */
     public static LicenseInfo checkLicenseKey(String licenseKey) {
         if (licenseKey == null || licenseKey.trim().isEmpty()) {
