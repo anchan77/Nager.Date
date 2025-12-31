@@ -12,7 +12,7 @@ import java.util.List;
  * Used when no specific provider is available for a country.
  * </p>
  */
-final class NoHolidaysHolidayProvider implements IHolidayProvider {
+public final class NoHolidaysHolidayProvider implements IHolidayProvider {
 
     private static final IHolidayProvider INSTANCE = new NoHolidaysHolidayProvider();
 
