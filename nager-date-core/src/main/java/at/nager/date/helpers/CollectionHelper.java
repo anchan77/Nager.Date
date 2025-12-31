@@ -11,7 +11,7 @@ import java.util.List;
  * Translates C# extension methods to Java static methods.
  * </p>
  */
-class CollectionHelper {
+public class CollectionHelper {
 
     /**
      * Private constructor to prevent instantiation
@@ -29,7 +29,7 @@ class CollectionHelper {
      * @param list the list to add to
      * @param item the item to add (may be null)
      */
-    static void addIfNotNull(List<HolidaySpecification> list, HolidaySpecification item) {
+    public static void addIfNotNull(List<HolidaySpecification> list, HolidaySpecification item) {
         if (item != null) {
             list.add(item);
         }
@@ -44,7 +44,7 @@ class CollectionHelper {
      * @param list the list to add to
      * @param items the array of items to add (may be null or empty)
      */
-    static void addRangeIfNotNull(List<HolidaySpecification> list, HolidaySpecification[] items) {
+    public static void addRangeIfNotNull(List<HolidaySpecification> list, HolidaySpecification[] items) {
         if (items == null || items.length == 0) {
             return;
         }

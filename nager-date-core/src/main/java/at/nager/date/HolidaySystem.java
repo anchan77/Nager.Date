@@ -317,21 +317,23 @@ public final class HolidaySystem {
             }
 
             // Check subdivision code if specified
+            // Note: If holiday.getSubdivisionCodes() is null, it's a national holiday and matches any subdivision
             if (subdivisionCode != null) {
                 String[] subdivisionCodes = holiday.getSubdivisionCodes();
-                if (subdivisionCodes == null) {
-                    return false;
-                }
-                boolean hasSubdivision = false;
-                for (String code : subdivisionCodes) {
-                    if (code.equals(subdivisionCode)) {
-                        hasSubdivision = true;
-                        break;
+                if (subdivisionCodes != null) {
+                    // Holiday has specific subdivision codes - check if requested subdivision is in the list
+                    boolean hasSubdivision = false;
+                    for (String code : subdivisionCodes) {
+                        if (code.equals(subdivisionCode)) {
+                            hasSubdivision = true;
+                            break;
+                        }
+                    }
+                    if (!hasSubdivision) {
+                        return false;
                     }
                 }
-                if (!hasSubdivision) {
-                    return false;
-                }
+                // If subdivisionCodes is null, it's a national holiday - always matches
             }
 
             // Check holiday types - at least one type must match
